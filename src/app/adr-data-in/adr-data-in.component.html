@@ -1,0 +1,102 @@
+<!-- <div class='container'> -->
+<div class='card'>
+    <div class='card-header'>
+      {{pageTitle}}      
+    </div>
+    <div class='card-body'>
+        
+        <form [formGroup]="adrDataForm" (ngSubmit)="onSubmit()">            
+            <div class="form-group">
+                <div class='row form-group'>
+                    <label class='col-md-4 col-form-label' for="ageId">Age:</label>
+                    <div class='col-md-8'>
+                        <input type="text" id="ageId" formControlName="age" required>
+                        <!-- <div [hidden]="nameField.valid || nameField.untouched" class="alert alert-danger">Enter age, a number.</div>                         -->
+                    </div>
+                </div>
+               <div class='row form-group'>
+                    <div class='col-md-4'>Gender:</div>
+                    <div class='col-md-auto'>
+                        <select class="form-control" id="genderId" formControlName="gender">                        
+                            <option value=""
+                                    disabled
+                                    selected="$1"
+                                    hidden>Select a gender...</option>
+                            <option value="M" selected>M</option>
+                            <option value="F">F</option>                  
+                        </select>
+                    </div>
+                </div>
+                <br/>
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <span class="text text-info">Conditions Selection</span>
+                    </div>
+                </div>
+                <div formArrayName="conditions">                            
+                    <div *ngFor="let condition of conditions.controls; let i=index">
+                        <div class='row form-group'>
+                            <div class='col-md-4'>Condition:</div>
+                            <div class='col-md-auto'>            
+                                <select  class="form-control" id="{{'condition' + i}}" [formControlName]="i">                  
+                                    <option value="NONE"                                            
+                                            disabled
+                                            selected>Select a condition</option>
+                                    <option *ngFor="let condition of conditionData; let i=index" [ngValue]="condition.conditionDesc">{{condition.conditionDesc}}</option>                             
+                                </select>          
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="addCondition()" type="button" class="btn btn-info btn-sm-">Add Another Condition</button>
+                </div>    
+               
+                <br/>
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <span class="text text-info">Drugs Selection</span>
+                    </div>
+                </div>
+                <div formArrayName="drugs">                            
+                    <div *ngFor="let drug of drugs.controls; let i=index">
+                        <div class='row form-group'>
+                            <div class='col-md-4'>Drug:</div>
+                            <div class='col-md-auto'>            
+                                <select  class="form-control" id="{{'drug' + i}}" [formControlName]="i">                  
+                                    <option value="NONE"                                            
+                                            disabled
+                                            selected>Select a drug</option>
+                                    <option *ngFor="let drug of drugData; let i=index" [ngValue]="drug.drugName">{{drug.drugName}}</option>                             
+                                </select>          
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="addDrug()" type="button" class="btn btn-info btn-sm-">Add Another Drug</button>
+                </div> 
+
+                <div class='row justify-content-center'>
+                    <div class='col-md-auto'>
+                        <button type="submit" class="btn btn-primary">Predict</button>                        
+                    </div>
+                </div>
+            </div>
+        </form>   
+             
+    </div>
+    
+  </div>
+  
+  <!-- <p>
+    Form Value: {{ adrDataForm.value | json }}
+  </p>
+
+
+   <p>
+        Form Status: {{ adrDataForm.status }}
+   </p> -->
+  
+  <!-- <div *ngIf='errorMessage'
+       class='alert alert-danger'>
+    Error: {{ errorMessage }}
+  </div> -->
+
+<!-- </div> -->

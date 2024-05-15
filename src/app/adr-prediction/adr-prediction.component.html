@@ -1,0 +1,88 @@
+<div class='card'>
+  <div class='card-header'>
+    {{pageTitle}}      
+  </div>
+  <div class='card-body'>
+    <div *ngIf='barChartData' class='card'>           
+          <div class='card-header child-header'>
+            Your total risk of developing servere ADRs is {{999.00}}%    
+          </div>
+          <div class='card-body'>          
+            <canvas baseChart 
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [colors]="barChartColors"
+            [plugins]="barChartPlugins"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            width="200" height="35">
+          </canvas>      
+        </div>      
+    </div>
+ 
+    <br/>
+
+    <div *ngIf='barChartDataStratified' class='card'>
+      <div class='card-header child-header'> The stratified risk among the most important ADR groups</div>
+      <div class='card-body'> 
+        <canvas baseChart 
+        [datasets]="barChartDataStratified"
+        [labels]="barChartLabelsStratified"
+        [options]="barChartOptions"
+        [colors]="barChartColorsStratified"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType"
+        width="200" height="50">
+      </canvas>
+    </div>
+  </div>
+
+   <!-- <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="mbarChartLabels"
+            [options]="barChartOptions"
+            [colors]="barChartColors"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+    </canvas> -->
+   <br/><br/>
+    <div class='table-responsive' *ngIf='importantAdrs && importantAdrs.length'>      
+     <!--  <div class='card-header child-header'>The most importnt ADRS that might develop are:</div>
+      <div class='card-body'>  -->
+      
+        <table>
+          <tr class="table-danger"><td><b>The most importnt ADRS that might develop are:</b></td></tr>        
+        </table>
+     
+        <table class='table table-bordered'>        
+          <thead class="thead-light">
+            <tr>           
+              <th>#No</th>           
+              <th>Adverse Drug Reaction</th>
+              <th>Risk% (Frequency x Severity)</th>           
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let importantAdr of importantAdrs; let i=index'>
+              <td> {{i+1}}</td>
+              <td>
+                {{importantAdr.adrName}}
+              </td>
+              <td>
+                {{importantAdr.riskPercent}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <!-- </div>
+    </div> -->
+
+  </div>
+</div>
+
+
+

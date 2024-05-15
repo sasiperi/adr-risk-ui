@@ -1,0 +1,6 @@
+---
+applications:
+- name: adr-prediction-app
+  host: adr-prediction-app
+  instances: 1
+  buildpack: staticfile_buildpack
